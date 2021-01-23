@@ -10,9 +10,9 @@ use Tenancy\Identification\Events\Switched;
 
 class Recorder
 {
-    protected $recording = true;
+    protected static $recording = true;
 
-    protected $events = [];
+    protected static $events = [];
 
     public function handle($event)
     {
@@ -33,25 +33,25 @@ class Recorder
 
     protected function registerEvent($event)
     {
-        $this->events[] = $event;
+        self::$events[] = $event;
     }
 
     protected function handleSwitched(Switched $event)
     {
-        if ($this->recording) {
+        if (self::$recording) {
             Event::dispatch(new ManuallyIdentified($event->tenant));
         }
 
-        $this->recording = true;
+        self::$recording = true;
     }
     
     protected function handleIdentified(Identified $event)
     {
-        $this->recording = false;
+        self::$recording = false;
     }
 
     protected function handleNothingIdentified(NothingIdentified $event)
     {
-        $this->recording = false;
+        self::$recording = false;
     }
 }
