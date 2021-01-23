@@ -6,7 +6,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ArlonWIP\\Tenancy\\Recorder": "src/"
+            "ArlonWIP\\Tenancy\\Recorder\\": "src/"
         }
     },
     "license": "MIT",
